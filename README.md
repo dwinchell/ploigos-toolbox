@@ -33,6 +33,11 @@ To uninstall and get your real commands back:
 source ./bin/uninstall
 ```
 
+# Running Locally
+```
+podman run --rm -it --volume=$(pwd):/working:Z ploigos-toolbox /bin/bas
+```
+
 # Demoing SonarQube Locally
 
 ```
