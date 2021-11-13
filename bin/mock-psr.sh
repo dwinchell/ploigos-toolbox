@@ -35,7 +35,7 @@ unit-test() {
   echo
 }
 
-vulnerability() {
+security() {
   echo
   echo "####################################################################################################"
   echo "############################     RUNNING VULNERABILITY SCAN     ####################################"
@@ -107,15 +107,15 @@ watch() {
 
 all() {
   unit-test
-  vulnerability
+  security
   quality
 }
 
 run() {
   if [ "${STEP}" == "unit-test" ]; then
     unit-test
-  elif [ "${STEP}" == "vulnerability" ]; then
-    vulnerability
+  elif [ "${STEP}" == "security" ]; then
+    security
   elif [ "${STEP}" == "quality" ]; then
     quality
   elif [ "${STEP}" == "all" ]; then
