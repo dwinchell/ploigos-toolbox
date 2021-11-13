@@ -17,6 +17,11 @@ Add this to your Devfile
     name: ploigos
 ```
 
+Build and publish the image:
+```
+buildah bud -t ploigos-toolbox . && podman push ploigos-toolbox quay.io/<<<< Your Repository >>>>/ploigos-toolbox
+```
+
 # Installing Locally
 The mocking aliases some conosole commands. To install:
 ```
@@ -28,3 +33,9 @@ To uninstall and get your real commands back:
 source ./bin/uninstall
 ```
 
+# Demoing SonarQube Locally
+
+```
+podman run --name=sonar -it -p 9000:9000 sonarqube:9.1.0-community
+psr quality
+```

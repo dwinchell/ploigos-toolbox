@@ -13,6 +13,7 @@ unit-test() {
     echo
     echo "Detected pom.xml. Using Maven. You can configure PSR to change this."
     mvn test
+    RESULT=$?
   elif [ -f "package.json" ]; then
     echo "####################################################################################################"
     echo "############################     USING NPM     #####################################################"
@@ -20,11 +21,12 @@ unit-test() {
     echo
     echo "Detected package.json. Using npm. You can configure PSR to change this."
     npm test
+    RESULT=$?
   else
     echo "Error: no step implementer specified in configuration and could not auto-detect which one to use."
   fi
   echo "####################################################################################################"
-  if [ $_ ]; then
+  if [[ ${RESULT} == 0 ]]; then
   echo "############################     UNIT TESTS PASS     ###############################################"
   else
   echo "############################     UNIT TESTS FAIL     ###############################################"
@@ -41,9 +43,10 @@ vulnerability() {
   echo
 
   snyk test
+    RESULT=$?
 
   echo "####################################################################################################"
-  if [ $_ ]; then
+  if [[ ${RESULT} == 0 ]]; then
   echo "############################     VULNERABILITY SCAN -  PASS     ####################################"
   else
   echo "############################     VULNERABILITY SCAN -  FAIL     ####################################"
@@ -58,10 +61,30 @@ quality() {
   echo "####################################################################################################"
   echo
 
-  sonar-scanner
+  if [ -f "pom.xml" ]; then
+    echo "####################################################################################################"
+    echo "############################     USING MAVEN     ###################################################"
+    echo "####################################################################################################"
+    echo
+    echo "Detected pom.xml. Using Maven. You can configure PSR to change this."
+    mvn checkstyle:check
+    RESULT=$?
+  elif [ -f "package.json" ]; then
+    echo "####################################################################################################"
+    echo "############################     USING NPM     #####################################################"
+    echo "####################################################################################################"
+    echo
+    echo "Detected package.json. Using npm. You can configure PSR to change this."
+    #cat package.json | jq .devDependencies.jslint | grep \"
+    npx jslint .
+    RESULT=$?
+  else
+    echo "Error: no step implementer specified in configuration and could not auto-detect which one to use."
+  fi
+
 
   echo "####################################################################################################"
-  if [ $_ ]; then
+  if [[ ${RESULT} == 0 ]]; then
   echo "############################     QUALITY SCAN -  PASS     ##########################################"
   else
   echo "############################     QUALITY SCAN -  FAIL     ##########################################"
@@ -69,7 +92,7 @@ quality() {
   echo "####################################################################################################"
 }
 
-monitor() {
+watch() {
  OLD_HASHES=""
  while [[ true ]]
  do
@@ -97,11 +120,10 @@ run() {
     quality
   elif [ "${STEP}" == "all" ]; then
     all
-  elif [ "${STEP}" == "monitor" ]; then
-    monitor all
+  elif [ "${STEP}" == "watch" ]; then
+    watch
   fi
 }
 
 run
-
 
