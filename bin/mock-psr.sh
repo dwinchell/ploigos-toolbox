@@ -1,81 +1,59 @@
 #!/bin/bash
 STEP=$1
+RESULT=0
 
-unit-test() {
+print_big() {
+  MESSAGE=$1
+  echo
   echo "####################################################################################################"
-  echo "############################     RUNNING UNIT TESTS     ############################################"
+  echo "############################     ${MESSAGE}     ##########################################"
   echo "####################################################################################################"
   echo
+}
+
+print_result() {
+  STEP_NAME=$1
+  if [[ ${RESULT} == 0 ]]; then
+      print_big "${STEP_NAME} PASS"
+  else
+      print_big "${STEP_NAME} FAIL"
+  fi
+}
+
+unit-test() {
   if [ -f "pom.xml" ]; then
-    echo "####################################################################################################"
-    echo "############################     USING MAVEN     ###################################################"
-    echo "####################################################################################################"
-    echo
+   print_big "USING MAVEN"
     echo "Detected pom.xml. Using Maven. You can configure PSR to change this."
     mvn test
     RESULT=$?
   elif [ -f "package.json" ]; then
-    echo "####################################################################################################"
-    echo "############################     USING NPM     #####################################################"
-    echo "####################################################################################################"
-    echo
+    print_big "USING_NPM"
     echo "Detected package.json. Using npm. You can configure PSR to change this."
     npm test
     RESULT=$?
   else
     echo "Error: no step implementer specified in configuration and could not auto-detect which one to use."
   fi
-  echo "####################################################################################################"
-  if [[ ${RESULT} == 0 ]]; then
-  echo "############################     UNIT TESTS PASS     ###############################################"
-  else
-  echo "############################     UNIT TESTS FAIL     ###############################################"
-  fi
-  echo "####################################################################################################"
-  echo
+
 }
 
 security() {
-  echo
-  echo "####################################################################################################"
-  echo "############################     RUNNING VULNERABILITY SCAN     ####################################"
-  echo "####################################################################################################"
-  echo
 
   #snyk test
   #mvn org.owasp:dependency-check-maven:check
   dependency-check -s .
   RESULT=$?
-
-  echo "####################################################################################################"
-  if [[ ${RESULT} == 0 ]]; then
-  echo "############################     VULNERABILITY SCAN -  PASS     ####################################"
-  else
-  echo "############################     VULNERABILITY SCAN -  FAIL     ####################################"
-  fi
-  echo "####################################################################################################"
 }
 
 quality() {
-  echo
-  echo "####################################################################################################"
-  echo "############################     RUNNING QUALITY SCAN     ##########################################"
-  echo "####################################################################################################"
-  echo
 
   if [ -f "pom.xml" ]; then
-    echo "####################################################################################################"
-    echo "############################     USING MAVEN     ###################################################"
-    echo "####################################################################################################"
-    echo
+    print_big "USING MAVEN"
     echo "Detected pom.xml. Using Maven. You can configure PSR to change this."
     mvn checkstyle:check
     RESULT=$?
   elif [ -f "package.json" ]; then
-    echo "####################################################################################################"
-    echo "############################     USING NPM     #####################################################"
-    echo "####################################################################################################"
-    echo
+    print_big "USING NPM"
     echo "Detected package.json. Using npm. You can configure PSR to change this."
     #cat package.json | jq .devDependencies.jslint | grep \"
     npx jslint .
@@ -83,15 +61,6 @@ quality() {
   else
     echo "Error: no step implementer specified in configuration and could not auto-detect which one to use."
   fi
-
-
-  echo "####################################################################################################"
-  if [[ ${RESULT} == 0 ]]; then
-  echo "############################     QUALITY SCAN -  PASS     ##########################################"
-  else
-  echo "############################     QUALITY SCAN -  FAIL     ##########################################"
-  fi
-  echo "####################################################################################################"
 }
 
 watch() {
@@ -113,13 +82,26 @@ all() {
   quality
 }
 
+
+
+display() {
+  STEP_FUNC=$1
+  STEP_NAME="${2}"
+
+  print_big "RUNNING ${STEP_NAME}"
+
+  ${STEP_FUNC}
+
+  print_result ${STEP_NAME}
+}
+
 run() {
   if [ "${STEP}" == "unit-test" ]; then
-    unit-test
+    display unit-test 'UNIT_TEST'
   elif [ "${STEP}" == "security" ]; then
-    security
+    display security 'SECURITY_SCAN'
   elif [ "${STEP}" == "quality" ]; then
-    quality
+    display quality 'QUALITY_SCAN'
   elif [ "${STEP}" == "all" ]; then
     all
   elif [ "${STEP}" == "watch" ]; then
@@ -128,4 +110,3 @@ run() {
 }
 
 run
-
