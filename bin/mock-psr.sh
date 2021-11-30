@@ -42,8 +42,10 @@ security() {
   echo "####################################################################################################"
   echo
 
-  snyk test
-    RESULT=$?
+  #snyk test
+  #mvn org.owasp:dependency-check-maven:check
+  dependency-check -s .
+  RESULT=$?
 
   echo "####################################################################################################"
   if [[ ${RESULT} == 0 ]]; then
