@@ -114,6 +114,6 @@ run() {
   elif [ "${STEP}" == "import" ]; then
     import
   fi
- }
+}
 
 run
