@@ -1,5 +1,6 @@
 #!/bin/bash
 STEP=$1
+IMPORT_URL=$2
 RESULT=0
 
 print_big() {
@@ -45,6 +46,10 @@ security() {
   RESULT=$?
 }
 
+import() {
+  wget ${IMPORT_URL}
+}
+
 quality() {
 
   if [ -f "pom.xml" ]; then
@@ -78,8 +83,8 @@ watch() {
 
 all() {
   unit-test
-  security
-  quality
+  #security
+  #quality
 }
 
 
@@ -106,7 +111,8 @@ run() {
     all
   elif [ "${STEP}" == "watch" ]; then
     watch
-  fi
-}
+  elif [ "${STEP}" == "import" ]; then
+    import
+  fi}
 
 run
