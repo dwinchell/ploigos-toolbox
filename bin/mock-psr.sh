@@ -113,6 +113,7 @@ run() {
     watch
   elif [ "${STEP}" == "import" ]; then
     import
-  fi}
+  fi
+ }
 
 run
