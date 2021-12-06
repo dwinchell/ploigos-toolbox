@@ -7,6 +7,11 @@ projects:
       location: 'git@github.com:dwinchell/ploigos-toolbox.git'
       startPoint: main
       type: git
+   - name: reference-quarkus-mvn
+    source:
+      location: 'git@github.com:ploigos-reference-apps/reference-quarkus-mvn.git'
+      startPoint: main
+      type: git
 components:
   - id: ms-python/python/latest
     preferences:
