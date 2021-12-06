@@ -40,9 +40,9 @@ unit-test() {
 
 security() {
 
-  #snyk test
+  snyk test
   #mvn org.owasp:dependency-check-maven:check
-  dependency-check -s .
+  #dependency-check -s .
   RESULT=$?
 }
 

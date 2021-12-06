@@ -29,7 +29,7 @@ components:
       - name: venv
         containerPath: /home/jboss/.venv
     alias: ploigos
-    image: 'quay.io/dwinchell_redhat/ploigos-workspace:0.1'
+    image: 'quay.io/dwinchell_redhat/ploigos-workspace:0.2'
 commands:
   - name: Debug current file
     actions:
