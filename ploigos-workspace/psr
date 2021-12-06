@@ -100,6 +100,10 @@ display() {
   print_result ${STEP_NAME}
 }
 
+onboard() {
+  cp /var/lib/psr/templates/Jenkinsfile .
+}
+
 run() {
   if [ "${STEP}" == "unit-test" ]; then
     display unit-test 'UNIT_TEST'
@@ -111,6 +115,8 @@ run() {
     all
   elif [ "${STEP}" == "watch" ]; then
     watch
+  elif [ "${STEP}" == "onboard" ]; then
+    onboard
   elif [ "${STEP}" == "import" ]; then
     import
   fi

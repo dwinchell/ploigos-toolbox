@@ -5,6 +5,7 @@ USER root
 
 # Mock the PSR ###########
 COPY ./psr /usr/local/bin/psr
+COPY ./templates/Jenkinsfile /var/lib/psr/templates/Jenkinsfile
 ##########################
 
 # Install openscap #######
