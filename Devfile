@@ -1,10 +1,10 @@
 apiVersion: 1.0.0
 metadata:
-  name: python-30wr
+  name: ploigos-toolbox
 projects:
-  - name: reference-quarkus-mvn
+   - name: ploigos-toolbox
     source:
-      location: 'git@github.com:ploigos-reference-apps/reference-quarkus-mvn.git'
+      location: 'git@github.com:dwinchell/ploigos-toolbox.git'
       startPoint: main
       type: git
 components:
