@@ -22,7 +22,7 @@ components:
     volumes:
       - name: venv
         containerPath: /home/jboss/.venv
-    alias: python
+    alias: ploigos
     image: 'quay.io/dwinchell_redhat/ploigos-workspace:0.1'
 commands:
   - name: 1. Run
