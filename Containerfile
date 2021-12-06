@@ -4,7 +4,7 @@ FROM registry.redhat.io/codeready-workspaces/plugin-java11-rhel8:2.13-6
 USER root
 
 # Mock the PSR ###########
-COPY ./psr /usr/local/bin/psr
+COPY ./bin/psr /usr/local/bin/psr
 COPY ./templates/Jenkinsfile /var/lib/psr/templates/Jenkinsfile
 ##########################
 
