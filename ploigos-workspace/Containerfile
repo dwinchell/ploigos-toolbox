@@ -30,6 +30,9 @@ RUN wget https://github.com/jeremylong/DependencyCheck/releases/download/v6.4.1/
 # snyk
 RUN npm install snyk@latest -g
 
+#RUN chown -R jboss: ~/.npm
+RUN rm -rf ~/.npm
+
 USER jboss
 
 # set entrypoint
