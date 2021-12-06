@@ -2,19 +2,8 @@ This is a mocked up demo of what the user experience of the ploigos step runner 
 
 # Installing in CodeReady Workspaces
 
-Add this to your Devfile
 ```
-  - container:
-      args:
-        - '-f'
-        - /dev/null
-      command:
-        - tail
-      image: quay.io/dwinchell_redhat/ploigos-toolbox
-      memoryLimit: 512M
-      mountSources: true
-      sourceMapping: /projects
-    name: ploigos
+crwctl workspace:create -f Devfile
 ```
 
 Build and publish the image:

@@ -61,7 +61,7 @@ quality() {
     print_big "USING NPM"
     echo "Detected package.json. Using npm. You can configure PSR to change this."
     #cat package.json | jq .devDependencies.jslint | grep \"
-    npx jslint .
+    npx eslint .
     RESULT=$?
   else
     echo "Error: no step implementer specified in configuration and could not auto-detect which one to use."
@@ -83,8 +83,8 @@ watch() {
 
 all() {
   unit-test
-  #security
-  #quality
+  quality
+  security
 }
 
 
