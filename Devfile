@@ -21,12 +21,6 @@ components:
     alias: ploigos
     image: 'quay.io/dwinchell_redhat/ploigos-workspace:0.1'
 commands:
-  - name: 1. Run
-    actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/python-hello-world'
-        type: exec
-        command: python -m venv .venv && . .venv/bin/activate && python hello-world.py
-        component: python
   - name: Debug current file
     actions:
       - referenceContent: |
