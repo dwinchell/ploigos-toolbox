@@ -19,12 +19,16 @@ COPY ./psr /usr/local/bin/psr
 # so still worth setting
 ##########################
 
+RUN microdnf install -y wget python3 npm
+
 # Dependency check #######
-RUN microdnf install -y wget python3
 RUN wget https://github.com/jeremylong/DependencyCheck/releases/download/v6.4.1/dependency-check-6.4.1-release.zip && \
     unzip dependency-check-6.4.1-release.zip -d /opt && \
     ln -s /opt/dependency-check/bin/dependency-check.sh /usr/bin/dependency-check
 ##########################
+
+# snyk
+RUN npm install snyk@latest -g
 
 USER jboss
 
