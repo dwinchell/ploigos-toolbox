@@ -37,7 +37,7 @@ commands:
         type: exec
         command: psr unit-test
         component: ploigos
-  - name: 2. psr qualit
+  - name: 2. psr quality
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
         type: exec
@@ -57,7 +57,7 @@ commands:
         component: ploigos
   - name: 5. psr onboard
     actions:
-      - workdir: '${CHE_PROJECTS_ROOT}/reference-quarkus-npm'
+      - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
         type: exec
         command: psr onboard
         component: ploigos
