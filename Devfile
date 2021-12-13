@@ -31,20 +31,28 @@ components:
     alias: ploigos
     image: 'quay.io/dwinchell_redhat/ploigos-toolbox'
 commands:
-  - name: Debug current file
+  - name: 1. Unit Test
     actions:
-      - referenceContent: |
-          {
-            "version": "0.2.0",
-            "configurations": [
-              {
-                "name": "Python: Current File",
-                "type": "python",
-                "request": "launch",
-                "program": "${file}",
-                "console": "internalConsole"
-              }
-            ]
-          }
-        type: vscode-launch
+      - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
+        type: exec
+        command: psr unit-test
+        component: ploigos
+  - name: 2. Quality Scan
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
+        type: exec
+        command: psr quality
+        component: ploigos
+  - name: 3. Security Scan
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
+        type: exec
+        command: psr security
+        component: ploigos
+  - name: 4. All Steps
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
+        type: exec
+        command: psr all
+        component: ploigos
 
