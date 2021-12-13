@@ -31,28 +31,34 @@ components:
     alias: ploigos
     image: 'quay.io/dwinchell_redhat/ploigos-toolbox'
 commands:
-  - name: 1. Unit Test
+  - name: 1. psr unit-test
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
         type: exec
         command: psr unit-test
         component: ploigos
-  - name: 2. Quality Scan
+  - name: 2. psr qualit
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
         type: exec
         command: psr quality
         component: ploigos
-  - name: 3. Security Scan
+  - name: 3. psr security
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
         type: exec
         command: psr security
         component: ploigos
-  - name: 4. All Steps
+  - name: 4. psr all
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/reference-nodejs-npm'
         type: exec
         command: psr all
+        component: ploigos
+  - name: 5. psr onboard
+    actions:
+      - workdir: '${CHE_PROJECTS_ROOT}/reference-quarkus-npm'
+        type: exec
+        command: psr onboard
         component: ploigos
 
