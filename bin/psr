@@ -63,6 +63,7 @@ quality() {
     print_big "USING NPM"
     echo "Detected package.json. Using npm. You can configure PSR to change this."
     #cat package.json | jq .devDependencies.jslint | grep \"
+    npm install
     npx eslint .
     RESULT=$?
   else
