@@ -9,10 +9,6 @@ crwctl workspace:create -f Devfile
 Build and publish the images:
 ```
 buildah bud -t ploigos-toolbox . && podman push ploigos-toolbox quay.io/<<<< Your Repository >>>>/ploigos-toolbox
-
-ploigos-workspace/
-buildah bud -t ploigos-workspace:0.2 && podman push ploigos-workspace:0.2 quay.io/<<<< Your Repository >>>>/ploigos-workspace
-
 ```
 
 # Installing Locally
