@@ -30,6 +30,8 @@ unit-test() {
   elif [ -f "package.json" ]; then
     print_big "USING_NPM"
     echo "Detected package.json. Using npm. You can configure PSR to change this."
+    [ -z "${WORKSPACE}" ] && npm config set cache ${WORKSPACE}/npm-cache
+    npm install
     npm test
     RESULT=$?
   else

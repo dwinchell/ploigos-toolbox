@@ -29,16 +29,6 @@ pipeline {
         }
 
         stages {
-            stage('Setup') {
-                steps {
-                    container('ploigos') {
-                        script {
-                            sh "npm config set cache ${WORKSPACE}/npm-cache"
-                            sh 'npm install'
-                        }
-                    }
-                }
-            }
             stage('Unit Test') {
                 steps {
                     container('ploigos') {
