@@ -57,8 +57,7 @@ security() {
     echo "Veracode is a popular alternative"
     RESULT=0
   else
-    echo use snyk
-    #snyk test
+    snyk test
     RESULT=$?
   fi
   #mvn org.owasp:dependency-check-maven:check
@@ -66,7 +65,8 @@ security() {
 }
 
 import() {
-  wget ${IMPORT_URL}
+  rm steps.yml
+  wget --no-cookies --no-cache ${IMPORT_URL}
 }
 
 quality() {
@@ -102,8 +102,11 @@ watch() {
 }
 
 all() {
+  print_big "RUNNING UNIT_TEST"
   unit-test
+  print_big "RUNNING QUALITY_SCAN"
   quality
+  print_big "RUNNING SECURITY_SCAN"
   security
 }
 
