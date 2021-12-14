@@ -2,11 +2,6 @@ apiVersion: 1.0.0
 metadata:
   name: ploigos-toolbox
 projects:
-  - name: ploigos-toolbox
-    source:
-      location: 'git@github.com:dwinchell/ploigos-toolbox.git'
-      startPoint: main
-      type: git
   - name: reference-quarkus-mvn
     source:
       location: 'git@github.com:dwinchell/reference-quarkus-mvn.git'
