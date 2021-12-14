@@ -15,7 +15,7 @@ pipeline {
         serviceAccount: ${params.workflowServiceAccountName}
         containers:
         - name: ploigos
-          image: "quay.io/dwinchell_redhat/ploigos-workspace"
+          image: "quay.io/dwinchell_redhat/ploigos-toolbox"
           imagePullPolicy: "IfNotPresent"
           tty: true
           volumeMounts:
