@@ -41,11 +41,28 @@ unit-test() {
 }
 
 security() {
+  FOUND_FORTIFY=1
+  FOUND_VERACODE=1
+  if [ -f steps.yml ]; then
+    grep fortify steps.yml &> /dev/null
+    FOUND_FORTIFY=$?
+    grep veracode steps.yml &> /dev/null
+    FOUND_VERACODE=$?
+  fi
 
-  snyk test
+  if [[ "${FOUND_FORTIFY}" == "0" ]]; then
+    echo "Many organizations use Fortify"
+    RESULT=0
+  elif [[ "${FOUND_VERACODE}" == "0" ]]; then
+    echo "Veracode is a popular alternative"
+    RESULT=0
+  else
+    echo use snyk
+    #snyk test
+    RESULT=$?
+  fi
   #mvn org.owasp:dependency-check-maven:check
   #dependency-check -s .
-  RESULT=$?
 }
 
 import() {
